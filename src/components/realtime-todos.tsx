@@ -39,8 +39,8 @@ export function RealtimeTodos({ data }: RealtimeTodosProps) {
     <ul>
       {todos?.map((todo) => (
         <li key={todo.id}>
-          <Link aria-label={`View ${todo.name}`} href={`/todo/${todo.id}`}>
-            {todo.name}
+          <Link aria-label={`View ${todo.title}`} href={`/todo/${todo.id}`}>
+            {todo.title}
           </Link>
         </li>
       ))}

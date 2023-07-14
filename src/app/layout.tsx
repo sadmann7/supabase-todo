@@ -8,7 +8,10 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 import "@/styles/globals.css"
 
-import { supabase } from "@/lib/supabase"
+import { cookies } from "next/headers"
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+
+import { type Database } from "@/types/supabase"
 
 export const metadata = {
   title: siteConfig.name,
@@ -20,7 +23,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const user = await supabase.auth.getUser()
+  const supabase = createServerComponentClient<Database>({ cookies })
+
+  const { data: userResponseData } = await supabase.auth.getUser()
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -34,7 +39,7 @@ export default async function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
-            <SiteHeader user={user} />
+            <SiteHeader user={userResponseData.user} />
             <main className="flex-1">{children}</main>
           </div>
           <TailwindIndicator />

@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { AvatarIcon, CheckCircledIcon, ExitIcon } from "@radix-ui/react-icons"
-import { UserResponse } from "@supabase/supabase-js"
+import { User } from "@supabase/supabase-js"
 
 import { siteConfig } from "@/config/site"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -18,10 +18,12 @@ import {
 import { ThemeToggle } from "@/components/layouts/theme-toggle"
 
 interface SiteHeaderProps {
-  user: UserResponse | null
+  user: User | null
 }
 
 export function SiteHeader({ user }: SiteHeaderProps) {
+  const initial = user?.email?.charAt(0).toUpperCase()
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex h-16 items-center space-x-4">
@@ -44,19 +46,16 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                   className="relative h-8 w-8 rounded-full"
                 >
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={""} alt={""} />
-                    <AvatarFallback>{"A"}</AvatarFallback>
+                    <AvatarFallback>{initial}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">
-                      Firstname Lastname
-                    </p>
+                    <p className="text-sm font-medium leading-none">Account</p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      email
+                      {user.email}
                     </p>
                   </div>
                 </DropdownMenuLabel>

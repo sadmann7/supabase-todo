@@ -11,24 +11,34 @@ export interface Database {
     Tables: {
       todos: {
         Row: {
-          completed: boolean
           created_at: string
           id: string
-          name: string
+          is_complete: boolean | null
+          title: string | null
+          user_id: string | null
         }
         Insert: {
-          completed?: boolean
           created_at?: string
           id?: string
-          name: string
+          is_complete?: boolean | null
+          title?: string | null
+          user_id?: string | null
         }
         Update: {
-          completed?: boolean
           created_at?: string
           id?: string
-          name?: string
+          is_complete?: boolean | null
+          title?: string | null
+          user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "todos_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {

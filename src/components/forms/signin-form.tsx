@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import type { z } from "zod"
 
 import { type Database } from "@/types/supabase"
@@ -42,12 +43,17 @@ export function SignInForm() {
   function onSubmit(data: Inputs) {
     startTransition(async () => {
       try {
-        await supabase.auth.signInWithPassword({
+        const { error } = await supabase.auth.signInWithPassword({
           email: data.email,
           password: data.password,
         })
+        if (error) {
+          toast.error(error.message)
+          return
+        }
         router.push(window.location.origin)
         router.refresh()
+        toast.success("Successfully signed in.")
       } catch (err) {
         catchError(err)
       }
