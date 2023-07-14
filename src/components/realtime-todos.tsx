@@ -23,6 +23,7 @@ export function RealtimeTodos({ data }: RealtimeTodosProps) {
           table: "todos",
         },
         (payload) => {
+          console.log(payload)
           setTodos((prev) => [...prev, payload.new as Todo])
         }
       )
@@ -31,7 +32,9 @@ export function RealtimeTodos({ data }: RealtimeTodosProps) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [todos, setTodos, data])
+  }, [todos, setTodos])
+
+  console.log(todos)
 
   return (
     <pre>

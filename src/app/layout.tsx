@@ -33,7 +33,6 @@ export default function RootLayout({
             <SiteHeader />
             <main className="flex-1">{children}</main>
           </div>
-          {children}
           <TailwindIndicator />
         </ThemeProvider>
         <Toaster />
