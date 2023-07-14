@@ -9,7 +9,7 @@ export default async function TodosPage() {
 
   return (
     <Shell>
-      <RealtimeTodos data={todos || []} />
+      <RealtimeTodos data={todos ?? []} />
     </Shell>
   )
 }
