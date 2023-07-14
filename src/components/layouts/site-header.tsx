@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { AvatarIcon, CheckCircledIcon, SquareIcon } from "@radix-ui/react-icons"
+import { AvatarIcon, CheckCircledIcon, ExitIcon } from "@radix-ui/react-icons"
 import { UserResponse } from "@supabase/supabase-js"
 
 import { siteConfig } from "@/config/site"
@@ -73,7 +73,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/signout">
-                    <SquareIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+                    <ExitIcon className="mr-2 h-4 w-4" aria-hidden="true" />
                     Log out
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                   </Link>
