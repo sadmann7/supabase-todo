@@ -8,16 +8,20 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 import "@/styles/globals.css"
 
+import { supabase } from "@/lib/supabase"
+
 export const metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const user = await supabase.auth.getUser()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -30,7 +34,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
-            <SiteHeader />
+            <SiteHeader user={user} />
             <main className="flex-1">{children}</main>
           </div>
           <TailwindIndicator />

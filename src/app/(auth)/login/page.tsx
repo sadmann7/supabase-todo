@@ -5,6 +5,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
+import { Shell } from "@/components/shell"
+
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -35,7 +37,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex w-full flex-1 flex-col justify-center gap-2 px-8 sm:max-w-md">
+    <Shell className="relative flex-1">
       <Link
         href="/"
         className="bg-btn-background hover:bg-btn-background-hover group absolute left-8 top-8 flex items-center rounded-md px-4 py-2 text-sm text-foreground no-underline"
@@ -63,7 +65,7 @@ export default function Login() {
         </p>
       ) : (
         <form
-          className="flex w-full flex-1 flex-col justify-center gap-2 text-foreground"
+          className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-2 text-foreground"
           onSubmit={view === "sign-in" ? handleSignIn : handleSignUp}
         >
           <label className="text-md" htmlFor="email">
@@ -121,6 +123,6 @@ export default function Login() {
           )}
         </form>
       )}
-    </div>
+    </Shell>
   )
 }

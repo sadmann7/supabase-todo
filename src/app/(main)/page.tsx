@@ -6,8 +6,6 @@ export const revalidate = 0
 export default async function TodosPage() {
   const { data: todos } = await supabase.from("todos").select()
 
-  console.log(todos)
-
   return (
     <Shell>
       <ul>{todos?.map((todo) => <li key={todo.id}>{todo.name}</li>)}</ul>
