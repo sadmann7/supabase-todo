@@ -19,7 +19,7 @@ export function RealtimeTodos({ data }: RealtimeTodosProps) {
       .on(
         "postgres_changes",
         {
-          event: "INSERT",
+          event: "*",
           schema: "public",
           table: "todos",
         },
@@ -33,13 +33,15 @@ export function RealtimeTodos({ data }: RealtimeTodosProps) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [todos, setTodos])
+  }, [todos, setTodos, data])
 
   return (
     <ul>
       {todos?.map((todo) => (
         <li key={todo.id}>
-          <Link href={`/todo/${todo.id}`}>{todo.name}</Link>
+          <Link aria-label={`View ${todo.name}`} href={`/todo/${todo.id}`}>
+            {todo.name}
+          </Link>
         </li>
       ))}
     </ul>
