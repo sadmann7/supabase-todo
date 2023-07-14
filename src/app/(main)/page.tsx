@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase"
+import { RealtimeTodos } from "@/components/realtime-todos"
 import { Shell } from "@/components/shell"
 
 export default async function TodosPage() {
@@ -6,5 +7,9 @@ export default async function TodosPage() {
 
   console.log(todos)
 
-  return <Shell></Shell>
+  return (
+    <Shell>
+      <RealtimeTodos data={todos ?? []} />
+    </Shell>
+  )
 }

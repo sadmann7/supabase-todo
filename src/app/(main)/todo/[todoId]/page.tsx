@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 
 import { supabase } from "@/lib/supabase"
+import { RealtimeTodo } from "@/components/realtime-todo"
 import { Shell } from "@/components/shell"
 
 interface TodoPageProps {
@@ -24,5 +25,9 @@ export default async function TodoPage({ params }: TodoPageProps) {
     notFound()
   }
 
-  return <Shell></Shell>
+  return (
+    <Shell>
+      <RealtimeTodo data={todo} />
+    </Shell>
+  )
 }

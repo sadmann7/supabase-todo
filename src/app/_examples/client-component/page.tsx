@@ -1,12 +1,13 @@
-'use client'
+"use client"
 
+import { useEffect, useState } from "react"
+import { type Todo } from "@/types"
 // TODO: Duplicate or move this file outside the `_examples` folder to make it a route
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useEffect, useState } from 'react'
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
 export default function ClientComponent() {
-  const [todos, setTodos] = useState<any[]>([])
+  const [todos, setTodos] = useState<Todo[]>([])
 
   // Create a Supabase client configured to use cookies
   const supabase = createClientComponentClient()
@@ -16,7 +17,7 @@ export default function ClientComponent() {
       // This assumes you have a `todos` table in Supabase. Check out
       // the `Create Table and seed with data` section of the README 👇
       // https://github.com/vercel/next.js/blob/canary/examples/with-supabase/README.md
-      const { data } = await supabase.from('todos').select()
+      const { data } = await supabase.from("todos").select()
       if (data) {
         setTodos(data)
       }
