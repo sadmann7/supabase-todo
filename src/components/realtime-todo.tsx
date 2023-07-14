@@ -24,6 +24,7 @@ export function RealtimeTodo({ data }: RealtimeTodoProps) {
           filter: `id=eq.${data.id}`,
         },
         (payload) => {
+          console.log(payload)
           setTodo(payload.new as Todo)
         }
       )

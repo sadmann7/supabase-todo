@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import { Todo } from "@/types"
 
 import { supabase } from "@/lib/supabase"
@@ -34,11 +35,13 @@ export function RealtimeTodos({ data }: RealtimeTodosProps) {
     }
   }, [todos, setTodos])
 
-  console.log(todos)
-
   return (
-    <pre>
-      <code>{JSON.stringify(todos, null, 2)}</code>
-    </pre>
+    <ul>
+      {todos?.map((todo) => (
+        <li key={todo.id}>
+          <Link href={`/todo/${todo.id}`}>{todo.name}</Link>
+        </li>
+      ))}
+    </ul>
   )
 }
