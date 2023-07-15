@@ -13,21 +13,21 @@ export interface Database {
         Row: {
           created_at: string
           id: string
-          is_complete: boolean | null
+          is_complete: boolean
           title: string | null
           user_id: string | null
         }
         Insert: {
           created_at?: string
           id?: string
-          is_complete?: boolean | null
+          is_complete?: boolean
           title?: string | null
           user_id?: string | null
         }
         Update: {
           created_at?: string
           id?: string
-          is_complete?: boolean | null
+          is_complete?: boolean
           title?: string | null
           user_id?: string | null
         }

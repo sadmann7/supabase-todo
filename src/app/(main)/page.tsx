@@ -5,7 +5,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { type Database } from "@/types/supabase"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { ManageTodoForm } from "@/components/forms/manage-todo-form"
+import { AddTodoForm } from "@/components/forms/add-todo-form"
 import { RealtimeTodos } from "@/components/realtime-todos"
 import { Shell } from "@/components/shell"
 
@@ -23,7 +23,7 @@ export default async function IndexPage() {
       {userResponseData.user ? (
         <div className="space-y-2">
           <RealtimeTodos data={todos ?? []} />
-          <ManageTodoForm />
+          <AddTodoForm />
         </div>
       ) : (
         <div className="flex flex-col items-center space-y-2">

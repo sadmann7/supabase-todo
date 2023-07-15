@@ -24,10 +24,10 @@ import { Input } from "@/components/ui/input"
 
 type Inputs = z.infer<typeof todoSchema>
 
-export function ManageTodoForm() {
+export function AddTodoForm() {
   const supabase = createClientComponentClient<Database>()
   const [isPending, startTransition] = React.useTransition()
-  const [isEditing, setIsEditing] = React.useState(false)
+  const [showForm, setShowForm] = React.useState(false)
 
   // react-hook-form
   const form = useForm<Inputs>({
@@ -59,10 +59,10 @@ export function ManageTodoForm() {
 
   // Set focus to the input when the form is opened
   React.useEffect(() => {
-    if (isEditing) {
+    if (showForm) {
       form.setFocus("title")
     }
-  }, [isEditing, form])
+  }, [showForm, form])
 
   return (
     <Form {...form}>
@@ -70,7 +70,7 @@ export function ManageTodoForm() {
         className="grid gap-4"
         onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
       >
-        {isEditing ? (
+        {showForm ? (
           <div className="flex flex-col space-y-3">
             <FormField
               control={form.control}
@@ -92,7 +92,7 @@ export function ManageTodoForm() {
                 variant="destructive"
                 size="sm"
                 className="h-8 w-full"
-                onClick={() => setIsEditing(false)}
+                onClick={() => setShowForm(false)}
               >
                 Cancel
               </Button>
@@ -118,7 +118,7 @@ export function ManageTodoForm() {
             type="button"
             variant="ghost"
             className="w-full"
-            onClick={() => setIsEditing(true)}
+            onClick={() => setShowForm(true)}
           >
             <PlusIcon
               className="mr-2 h-5 w-5 text-red-500"
