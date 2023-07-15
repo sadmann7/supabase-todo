@@ -3,7 +3,7 @@
 import * as React from "react"
 import { type Todo } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { PlusIcon, ReloadIcon } from "@radix-ui/react-icons"
+import { ReloadIcon } from "@radix-ui/react-icons"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -26,12 +26,14 @@ import { Input } from "@/components/ui/input"
 type Inputs = z.infer<typeof addTodoSchema>
 
 interface UpdateTodoFormProps {
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
   todo: Todo
   isEditing: boolean
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function UpdateTodoForm({
+  setTodos,
   todo,
   isEditing,
   setIsEditing,
@@ -43,7 +45,7 @@ export function UpdateTodoForm({
   const form = useForm<Inputs>({
     resolver: zodResolver(todoSchema),
     defaultValues: {
-      title: "",
+      title: todo.title ?? "",
       is_completed: false,
     },
   })
@@ -53,6 +55,10 @@ export function UpdateTodoForm({
 
     startTransition(async () => {
       try {
+        setTodos((prev) =>
+          prev.map((t) => (t.id === todo.id ? { ...t, ...data } : t))
+        )
+
         const { error } = await supabase
           .from("todos")
           .update(data)
