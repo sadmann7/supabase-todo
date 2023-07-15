@@ -3,14 +3,17 @@
 import * as React from "react"
 import Link from "next/link"
 import { Todo } from "@/types"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
-import { supabase } from "@/lib/supabase"
+import { Database } from "@/types/supabase"
+import { ManageTodoForm } from "@/components/forms/manage-todo-form"
 
 interface RealtimeTodosProps {
   data: Todo[]
 }
 
 export function RealtimeTodos({ data }: RealtimeTodosProps) {
+  const supabase = createClientComponentClient<Database>()
   const [todos, setTodos] = React.useState<Todo[]>(data)
 
   React.useEffect(() => {
@@ -33,7 +36,7 @@ export function RealtimeTodos({ data }: RealtimeTodosProps) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [todos, setTodos, data])
+  }, [todos, setTodos, data, supabase])
 
   return (
     <ul>

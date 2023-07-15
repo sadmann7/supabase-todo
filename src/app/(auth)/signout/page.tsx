@@ -1,6 +1,13 @@
+import { type Metadata } from "next"
+
 import { LogOutButtons } from "@/components/auth/logout-buttons"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shell"
+
+export const metadata: Metadata = {
+  title: "Sign Out",
+  description: "Sign out of your account",
+}
 
 export default function SignOutPage() {
   return (

@@ -1,3 +1,7 @@
+import { cookies } from "next/headers"
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+
+import { type Database } from "@/types/supabase"
 import { siteConfig } from "@/config/site"
 import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
@@ -7,11 +11,6 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import "@/styles/globals.css"
-
-import { cookies } from "next/headers"
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-
-import { type Database } from "@/types/supabase"
 
 export const metadata = {
   title: siteConfig.name,
