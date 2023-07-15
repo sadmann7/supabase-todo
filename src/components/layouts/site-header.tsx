@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { AvatarIcon, CheckCircledIcon, ExitIcon } from "@radix-ui/react-icons"
+import { CheckCircledIcon, ExitIcon } from "@radix-ui/react-icons"
 import { User } from "@supabase/supabase-js"
 
 import { siteConfig } from "@/config/site"
@@ -8,7 +8,6 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -59,16 +58,6 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                     </p>
                   </div>
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard/account">
-                      <AvatarIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-                      Account
-                      <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/signout">
